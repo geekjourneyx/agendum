@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="1200" height="380" viewBox="0 0 1200 380"
+     role="img" aria-labelledby="title desc">
+  <title id="title">Agendum — From signals to things worth doing</title>
+  <desc id="desc">A personal signal-to-action system connecting HN, AIHot, X, GitHub and newsletters to evidence, decisions and concrete actions.</desc>
+
+  <rect width="1200" height="380" rx="28" fill="#08090A"/>
+  <rect x="48" y="48" width="1104" height="284" rx="22" fill="#0D0F11" stroke="#2B2E31"/>
+
+  <g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif">
+    <text x="82" y="91" fill="#B7B1A3" font-size="16" font-weight="600" letter-spacing="2">PERSONAL DECISION LAYER</text>
+    <text x="82" y="154" fill="#F4F1E9" font-size="58" font-weight="750" letter-spacing="-1.5">AGENDUM</text>
+    <text x="84" y="190" fill="#B7B1A3" font-size="20">From signals to things worth doing.</text>
+
+    <g font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13">
+      <rect x="82" y="224" width="84" height="34" rx="17" fill="#171A1D" stroke="#34383C"/>
+      <text x="124" y="246" text-anchor="middle" fill="#D7D3CA">HN</text>
+      <rect x="176" y="224" width="84" height="34" rx="17" fill="#171A1D" stroke="#34383C"/>
+      <text x="218" y="246" text-anchor="middle" fill="#D7D3CA">AIHOT</text>
+      <rect x="270" y="224" width="84" height="34" rx="17" fill="#171A1D" stroke="#34383C"/>
+      <text x="312" y="246" text-anchor="middle" fill="#D7D3CA">X</text>
+      <rect x="364" y="224" width="84" height="34" rx="17" fill="#171A1D" stroke="#34383C"/>
+      <text x="406" y="246" text-anchor="middle" fill="#D7D3CA">GITHUB</text>
+      <rect x="458" y="224" width="84" height="34" rx="17" fill="#171A1D" stroke="#34383C"/>
+      <text x="500" y="246" text-anchor="middle" fill="#D7D3CA">READING</text>
+    </g>
+
+    <path d="M570 96V292" stroke="#34383C"/>
+    <path d="M590 190H670" stroke="#B5965A" stroke-width="2"/>
+    <path d="M660 182L672 190L660 198" fill="none" stroke="#B5965A" stroke-width="2"/>
+
+    <g transform="translate(696 82)">
+      <rect x="0" y="0" width="408" height="62" rx="14" fill="#131619" stroke="#34383C"/>
+      <circle cx="31" cy="31" r="9" fill="#B5965A"/>
+      <text x="54" y="28" fill="#F4F1E9" font-size="18" font-weight="700">EVIDENCE</text>
+      <text x="54" y="48" fill="#858A8E" font-size="13">verify the signal before acting</text>
+
+      <rect x="0" y="76" width="408" height="62" rx="14" fill="#131619" stroke="#34383C"/>
+      <circle cx="31" cy="31" r="9" fill="#B5965A" transform="translate(0 76)"/>
+      <text x="54" y="104" fill="#F4F1E9" font-size="18" font-weight="700">DECISION</text>
+      <text x="54" y="124" fill="#858A8E" font-size="13">decide what deserves attention</text>
+
+      <rect x="0" y="152" width="408" height="62" rx="14" fill="#181713" stroke="#B5965A"/>
+      <circle cx="31" cy="183" r="9" fill="#B5965A"/>
+      <text x="54" y="180" fill="#F4F1E9" font-size="18" font-weight="700">ACTION</text>
+      <text x="54" y="200" fill="#B9A77E" font-size="13">read · research · test · build · write</text>
+    </g>
+
+    <text x="82" y="300" fill="#777C80" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="12">SIGNAL → EVIDENCE → DECISION → ACTION</text>
+    <text x="1118" y="300" text-anchor="end" fill="#777C80" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="12">GEEKJOURNEY</text>
+  </g>
+</svg>
