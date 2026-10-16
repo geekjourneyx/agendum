@@ -317,6 +317,39 @@ Agendum is the layer that turns a growing stream of information into a smaller, 
 
 
 
+## Email is a signal source, not an inbox to summarize
+
+Newsletter and email are part of Agendum's upstream information system.
+
+The goal is **not** to produce another inbox digest. For Gmail / Outlook and other newsletter sources:
+
+1. Scan the available high-signal newsletters and relevant email.
+2. Deduplicate stories that already appeared in HN, AIHot, X, GitHub, or other sources.
+3. Identify the few items that deserve the user's attention.
+4. Verify important claims against the original source.
+5. Decide whether each item should become **READ / RESEARCH / EXPERIMENT / BUILD / WRITE / POST / UPDATE / DOMAIN / BUY / WATCH**.
+6. Create an Issue only when there is a concrete decision and useful next action.
+
+The desired transformation is:
+
+```text
+Newsletter / Email
+      ↓
+Signal extraction
+      ↓
+Deduplication
+      ↓
+Evidence verification
+      ↓
+Judgment
+      ↓
+Decision
+      ↓
+Action Issue
+```
+
+**Email is an information source, not an inbox to summarize. Extract the few signals worth acting on.**
+
 ## Issue-driven operations
 
 Agendum uses a structured GitHub Issue form as the bridge from research to execution.
