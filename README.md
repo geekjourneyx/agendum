@@ -314,3 +314,32 @@ The repository can evolve as the workflow becomes more automated.
 
 Agendum is the layer that turns a growing stream of information into a smaller, clearer queue of things worth doing.
 
+
+
+## Issue-driven operations
+
+Agendum uses a structured GitHub Issue form as the bridge from research to execution.
+
+Each Action records:
+
+**date → source → event → evidence → decision → next action → progress → result**
+
+The repository also maintains a small machine-readable label vocabulary for action type, priority, and topic. See [Issue Label Specification](./ISSUE_LABELS.md).
+
+The intended workflow is:
+
+```text
+Signal
+  ↓
+Evidence
+  ↓
+Decision
+  ↓
+GitHub Issue
+  ↓
+Progress
+  ↓
+Result
+  ↓
+Next Decision
+```
