@@ -26,6 +26,8 @@ Agendum uses labels to make the action queue machine-readable.
 | p1 | Worth doing this week |
 | p2 | Useful backlog |
 
+**WATCH** is a priority-level option meaning no p-label. It is not a fourth label beside `p0` / `p1` / `p2`. An issue still has exactly one priority choice: P0, P1, P2, or WATCH. WATCH adds no `p0`, `p1`, or `p2` label. When the type or the priority is WATCH, apply the existing `watch` label and remove any p-label.
+
 ## Topic
 
 | Label | Meaning |
@@ -66,6 +68,10 @@ research + p1 + ai
 
 experiment + p0 + product
 
+read + watch (type READ, priority WATCH: no p-label)
+
+watch (type WATCH, priority WATCH: the type label is `watch`, and there is no p-label)
+
 Avoid adding labels merely for decoration.
 
 ## Title convention
@@ -80,4 +86,4 @@ Examples:
 
 [WRITE] 2026-10-16 · Explain why Agent evaluation is shifting to Cost / Task
 
-For P0/P1/P2, priority is represented by the label rather than duplicated in the title.
+For P0/P1/P2, priority is represented by the label rather than duplicated in the title. WATCH is a priority choice that does not add a p-label.

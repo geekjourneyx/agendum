@@ -110,9 +110,21 @@ A popular post is a signal.
 
 ## Issue-driven workflow
 
-GitHub Issues are the operational queue.
+GitHub Issues are the operational queue. An issue exists so a reader can decide in a minute, execute, and record what happened. The form follows that order:
 
-Recommended format:
+**decision → trust / evidence → understand → act → learn**
+
+| Stage | What to record |
+| --- | --- |
+| **Decision** | Type, priority (`P0` / `P1` / `P2` / `WATCH`), effort, the one-line judgment, and why it is worth doing now |
+| **Trust / evidence** | Evidence chain, then the channel where the signal was found |
+| **Understand** | What happened, the breakdown, and a summary of at most three sentences |
+| **Act** | The next step, the expected result, and the standard for done |
+| **Learn** | Progress log, result / review, and the follow-up decision |
+
+`WATCH` as priority means keep observing and apply no `p0` / `p1` / `p2` label.
+
+Recommended titles use `[TYPE] YYYY-MM-DD · one-line decision / action`:
 
 ```text
 [READ] Deep read: ...
@@ -126,20 +138,9 @@ Recommended format:
 [WATCH] Monitor: ...
 ```
 
-A useful Issue should answer:
+Agents that create Issues through the API should start from [docs/issue-body-skeleton.md](docs/issue-body-skeleton.md). Those `###` headings must match the form output exactly. The label workflow reads only the first non-empty line under `### 事件类型` and `### 优先级`.
 
-- **Decision** — what was decided?
-- **Why** — why does it matter?
-- **Signal** — what happened?
-- **Evidence** — where is the proof?
-- **Why it matters to GeekJourney** — what is the connection?
-- **Recommended action** — what should happen next?
-- **Expected outcome** — what will we learn or produce?
-- **Effort** — how much time / complexity?
-- **Priority** — P0 / P1 / P2
-- **Sources** — can someone retrace the conclusion?
-
-If those questions cannot be answered, the signal probably should not become an Issue yet.
+If the decision, the evidence, and the next step cannot be filled in, the signal should not become an Issue yet.
 
 ---
 
@@ -356,9 +357,9 @@ Agendum uses a structured GitHub Issue form as the bridge from research to execu
 
 Each Action records:
 
-**date → source → event → evidence → decision → next action → progress → result**
+**decision → trust / evidence → understand → act → learn**
 
-The repository also maintains a small machine-readable label vocabulary for action type, priority, and topic. See [Issue Label Specification](./ISSUE_LABELS.md).
+The repository also maintains a small machine-readable label vocabulary for action type, priority, and topic. See [Issue Label Specification](.github/ISSUE_LABELS.md). API-created issues use the headings in [docs/issue-body-skeleton.md](docs/issue-body-skeleton.md).
 
 The intended workflow is:
 

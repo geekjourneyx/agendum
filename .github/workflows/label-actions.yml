@@ -18,25 +18,80 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
           set -euo pipefail
-          body="$(gh issue view "$ISSUE_NUMBER" --repo "$GH_REPO" --json body --jq '.body')"
+          body="$(gh issue view "$ISSUE_NUMBER" --repo "$GH_REPO" --json body --jq '.body' | tr -d '\r')"
+
+          # 只取标题下第一行非空内容，避免正文里其它单词误命中
+          field() {
+            printf '%s\n' "$body" | awk -v h="### $1" '
+              $0 == h { f = 1; next }
+              f && /^### / { exit }
+              f && NF { gsub(/^[ \t]+|[ \t]+$/, ""); print; exit }'
+          }
+          type="$(field "事件类型" | tr '[:lower:]' '[:upper:]')"
+          prio="$(field "优先级" | tr '[:lower:]' '[:upper:]')"
+
+          all_types=(read research experiment build write post update domain buy watch)
+          all_prios=(p0 p1 p2)
           add=()
-          case "$body" in
-            *"### 事件类型"*"READ"*) add+=(read) ;;
-            *"### 事件类型"*"RESEARCH"*) add+=(research) ;;
-            *"### 事件类型"*"EXPERIMENT"*) add+=(experiment) ;;
-            *"### 事件类型"*"BUILD"*) add+=(build) ;;
-            *"### 事件类型"*"WRITE"*) add+=(write) ;;
-            *"### 事件类型"*"POST"*) add+=(post) ;;
-            *"### 事件类型"*"UPDATE"*) add+=(update) ;;
-            *"### 事件类型"*"DOMAIN"*) add+=(domain) ;;
-            *"### 事件类型"*"BUY"*) add+=(buy) ;;
-            *"### 事件类型"*"WATCH"*) add+=(watch) ;;
+          remove=()
+
+          case "$type" in
+            READ|RESEARCH|EXPERIMENT|BUILD|WRITE|POST|UPDATE|DOMAIN|BUY|WATCH)
+              t="${type,,}"
+              add+=("$t")
+              for x in "${all_types[@]}"; do
+                if [ "$x" != "$t" ]; then
+                  remove+=("$x")
+                fi
+              done
+              ;;
+            *) echo "未识别事件类型: '$type'，跳过类型标签" ;;
           esac
-          case "$body" in
-            *"### 优先级"*"P0"*) add+=(p0) ;;
-            *"### 优先级"*"P1"*) add+=(p1) ;;
-            *"### 优先级"*"P2"*) add+=(p2) ;;
-          esac
+
+          # WATCH 类型或 WATCH 优先级：不挂 p 标签，只保证有 watch
+          if [ "$type" = "WATCH" ] || [ "$prio" = "WATCH" ]; then
+            [[ " ${add[*]-} " == *" watch "* ]] || add+=(watch)
+            for x in "${all_prios[@]}"; do
+              remove+=("$x")
+            done
+          else
+            case "$prio" in
+              P0|P1|P2)
+                p="${prio,,}"
+                add+=("$p")
+                for x in "${all_prios[@]}"; do
+                  if [ "$x" != "$p" ]; then
+                    remove+=("$x")
+                  fi
+                done
+                ;;
+              *) echo "未识别优先级: '$prio'，跳过优先级标签" ;;
+            esac
+          fi
+
+          # 编辑后修正旧标签。只移除当前已挂、且本次不会重新添加的标签，
+          # 避免「类型 READ + 优先级 WATCH」时把刚加回的 watch 又删掉。
+          current="$(gh issue view "$ISSUE_NUMBER" --repo "$GH_REPO" --json labels --jq '.labels[].name')"
+          rm_now=()
+          for x in "${remove[@]-}"; do
+            [ -n "$x" ] || continue
+            for a in "${add[@]-}"; do
+              if [ "$x" = "$a" ]; then
+                continue 2
+              fi
+            done
+            if printf '%s\n' "$current" | grep -qx "$x"; then
+              rm_now+=("$x")
+            fi
+          done
+
+          args=()
           if [ "${#add[@]}" -gt 0 ]; then
-            gh issue edit "$ISSUE_NUMBER" --repo "$GH_REPO" --add-label "$(IFS=,; echo "${add[*]}")"
+            args+=(--add-label "$(IFS=,; echo "${add[*]}")")
+          fi
+          if [ "${#rm_now[@]}" -gt 0 ]; then
+            args+=(--remove-label "$(IFS=,; echo "${rm_now[*]}")")
+          fi
+          if [ "${#args[@]}" -gt 0 ]; then
+            gh issue edit "$ISSUE_NUMBER" --repo "$GH_REPO" "${args[@]}"
           fi
