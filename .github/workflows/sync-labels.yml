@@ -1,0 +1,48 @@
+name: Sync Agendum labels
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  labels:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync labels
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          labels=(
+            'action|7057ff|Validated signal that requires a concrete next step'
+            'read|0969da|Deep reading'
+            'research|1f883d|Research or investigation'
+            'experiment|bf8700|Small experiment before commitment'
+            'build|8250df|Product, tool, or open-source build'
+            'write|0550ae|Article or long-form content'
+            'post|0e8a16|X or social distribution'
+            'update|5319e7|Website, README, or existing project update'
+            'domain|9c36b5|Domain evaluation or acquisition'
+            'buy|cf222e|Tool or service purchase'
+            'watch|6e7781|Continue observing without commitment'
+            'p0|cf222e|Act today'
+            'p1|bf8700|Worth doing this week'
+            'p2|6e7781|Useful backlog'
+            'ai|1f6feb|AI or models'
+            'agent|8250df|Agent systems'
+            'harness|5319e7|Agent Harness'
+            'opensource|238636|Open source'
+            'product|9a6700|Product or business opportunity'
+            'content|0969da|Content or distribution'
+            'website|1f883d|Personal website'
+            'apple|8250df|Apple, iOS, or Apple Watch'
+          )
+          for item in "${labels[@]}"; do
+            IFS='|' read -r name color description <<< "$item"
+            gh label create "$name" --color "$color" --description "$description" --force --repo "$GH_REPO"
+          done
