@@ -156,6 +156,7 @@ Agendum is designed to consume multiple upstream sources rather than becoming an
 - X first-hand signals
 - X bookmarks and saved items
 - X discussions from followed accounts
+- Gmail / Outlook newsletters and high-value email
 - Weekly Wisereads
 - 阮一峰《科技爱好者周刊》
 - Small creative projects and product opportunities
