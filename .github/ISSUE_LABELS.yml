@@ -1,0 +1,67 @@
+labels:
+  - name: action
+    color: "7057ff"
+    description: "Validated signal that requires a concrete next step"
+  - name: read
+    color: "0969da"
+    description: "Deep reading"
+  - name: research
+    color: "1f883d"
+    description: "Research or investigation"
+  - name: experiment
+    color: "bf8700"
+    description: "Small experiment before commitment"
+  - name: build
+    color: "8250df"
+    description: "Product, tool, or open-source build"
+  - name: write
+    color: "0550ae"
+    description: "Article or long-form content"
+  - name: post
+    color: "0e8a16"
+    description: "X or social distribution"
+  - name: update
+    color: "5319e7"
+    description: "Website, README, or existing project update"
+  - name: domain
+    color: "9c36b5"
+    description: "Domain evaluation or acquisition"
+  - name: buy
+    color: "cf222e"
+    description: "Tool or service purchase"
+  - name: watch
+    color: "6e7781"
+    description: "Continue observing without commitment"
+  - name: p0
+    color: "cf222e"
+    description: "Act today"
+  - name: p1
+    color: "bf8700"
+    description: "Worth doing this week"
+  - name: p2
+    color: "6e7781"
+    description: "Useful backlog"
+  - name: ai
+    color: "1f6feb"
+    description: "AI or models"
+  - name: agent
+    color: "8250df"
+    description: "Agent systems"
+  - name: harness
+    color: "5319e7"
+    description: "Agent Harness"
+  - name: opensource
+    color: "238636"
+    description: "Open source"
+  - name: product
+    color: "9a6700"
+    description: "Product or business opportunity"
+  - name: content
+    color: "0969da"
+    description: "Content or distribution"
+  - name: website
+    color: "1f883d"
+    description: "Personal website"
+  - name: apple
+    color: "8250df"
+    description: "Apple, iOS, or Apple Watch"
