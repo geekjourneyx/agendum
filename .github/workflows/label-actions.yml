@@ -1,0 +1,42 @@
+name: Label Agendum actions
+
+on:
+  issues:
+    types: [opened, edited, reopened]
+
+permissions:
+  issues: write
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Apply type and priority labels
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          body="$(gh issue view "$ISSUE_NUMBER" --repo "$GH_REPO" --json body --jq '.body')"
+          add=()
+          case "$body" in
+            *"### 事件类型"*"READ"*) add+=(read) ;;
+            *"### 事件类型"*"RESEARCH"*) add+=(research) ;;
+            *"### 事件类型"*"EXPERIMENT"*) add+=(experiment) ;;
+            *"### 事件类型"*"BUILD"*) add+=(build) ;;
+            *"### 事件类型"*"WRITE"*) add+=(write) ;;
+            *"### 事件类型"*"POST"*) add+=(post) ;;
+            *"### 事件类型"*"UPDATE"*) add+=(update) ;;
+            *"### 事件类型"*"DOMAIN"*) add+=(domain) ;;
+            *"### 事件类型"*"BUY"*) add+=(buy) ;;
+            *"### 事件类型"*"WATCH"*) add+=(watch) ;;
+          esac
+          case "$body" in
+            *"### 优先级"*"P0"*) add+=(p0) ;;
+            *"### 优先级"*"P1"*) add+=(p1) ;;
+            *"### 优先级"*"P2"*) add+=(p2) ;;
+          esac
+          if [ "${#add[@]}" -gt 0 ]; then
+            gh issue edit "$ISSUE_NUMBER" --repo "$GH_REPO" --add-label "$(IFS=,; echo "${add[*]}")"
+          fi
